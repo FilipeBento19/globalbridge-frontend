@@ -1,0 +1,1 @@
+# Lógica reutilizável (Composition API)
