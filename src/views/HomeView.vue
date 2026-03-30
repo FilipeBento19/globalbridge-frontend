@@ -1,8 +1,12 @@
 <script setup>
+import HeaderComponent from "@/components/HeaderComponent.vue";
+// sem alterações
 </script>
 
 <template>
-  <main>
-    <h1>bradfort</h1>
-  </main>
+  <HeaderComponent/>
+  
 </template>
+
+<style scoped>
+</style>
