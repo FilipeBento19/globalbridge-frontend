@@ -1,23 +1,25 @@
-<script>
+<script setup>
+import ButtonComponent from './ButtonComponent.vue';
 </script>
 <template>
 
   <header class="navbar">
-    <div class="navbar_logo">
-      <img src="/public/logogb.png" alt="">
+    <div>
+      <a class="navbar_logo" href="#"><img src="/logogb.png" alt=""></a>
     </div>
 
     <nav class="navbar_links">
       <a href="#">Meu destino</a>
       <a href="#">Companhias</a>
-      <a href="#">Anos</a>
+      <a href="#">Anus</a>
       <a href="#">Contato</a>
     </nav>
 
-    <button class="navbar_cta">
-      Work with us
-      <span class="cta-icon">↗</span>
-    </button>
+    <ButtonComponent 
+      text="Work with us" 
+      iconPath="/icons/icon_button.png" 
+      class="buttonheader"
+    />
   </header>
 </template>
 <style scoped>
@@ -34,55 +36,44 @@
   border-radius: 15px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   font-family: 'Montserrat', sans-serif;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 16px auto;
 }
+
+/*  Navbar Logo  */
+.navbar_logo img {
+  transition: transform 0.2s ease;
+}
+
+.navbar_logo img:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+
 /*  Nav links  */
 .navbar_links {
   display: flex;
-  gap: 40px;
+  gap: 20px;
 }
 
 .navbar_links a {
   text-decoration: none;
-  color: #1a1a1a;
+  color: #42023C;
   font-size: 14px;
   font-weight: 600;
   position: relative;
   transition: color 0.2s;
+  padding: 8px 10px;
+
+  transition: all 0.2s ease;
 }
 
 .navbar_links a:hover {
-  color: #42023C;
+  background: #f0ede6;
+  border-radius: 20px;
+  transform: scale(1.05);
 }
 
-/*  CTA button  */
-.navbar_cta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #A33DA3;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 22px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  white-space: nowrap;
-}
 
-.cta-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  font-size: 14px;
-  line-height: 1;
-}
 </style>
