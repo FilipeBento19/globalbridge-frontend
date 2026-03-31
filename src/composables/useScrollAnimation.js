@@ -8,12 +8,14 @@ export function useScrollAnimation(endScroll = 600) {
   onUnmounted(() => window.removeEventListener("scroll", updateScroll))
 
   const videoStyle = computed(() => {
-    const p = Math.min(Math.max(scrollY.value / endScroll, 0), 1)
+    const rawP = Math.min(Math.max(scrollY.value / endScroll, 0), 1)
+
+    const p = Math.min(rawP, 0.6) 
+
     return {
       transform: `scale(${1 - p * 0.25})`,
-      borderRadius: `${p * 90}px`,
+      borderRadius: `${p * 70}px`,
       width: `${100 - p * 15}%`,
-      transition: 'transform 0.2s ease-out'
     }
   })
 

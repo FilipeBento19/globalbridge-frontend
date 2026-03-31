@@ -5,14 +5,14 @@ import ButtonComponent from './ButtonComponent.vue';
 
   <header class="navbar">
     <div>
-      <a class="navbar_logo" href="#"><img src="/logogb.png" alt=""></a>
+      <router-link class="navbar_logo" to="/"><img src="/logogb.png" alt=""></router-link>
     </div>
 
     <nav class="navbar_links">
-      <a href="#">Meu destino</a>
-      <a href="#">Companhias</a>
-      <a href="#">Anus</a>
-      <a href="#">Contato</a>
+      <router-link to="/">Meu destino</router-link>
+      <router-link to="/">Companhias</router-link>
+      <router-link to="/">Anus</router-link>
+      <router-link to="/test">Contato</router-link>
     </nav>
 
     <ButtonComponent 

@@ -37,33 +37,35 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Estilo base para QUALQUER vídeo */
 .video-container {
   width: 100%;
   position: relative;
   overflow: hidden;
+  
 }
 
 .video-bg {
   width: 100%;
-  height: auto;
+  height: 72%;
   display: block;
   object-fit: cover;
 }
 
 .scroll-wrapper {
-  height: 140vh; /* Cria o espaço de respiro para o scroll */
+  height: 140vh;
   display: flex;
   justify-content: center;
   align-items: flex-start; 
   background-color: transparent; 
-  margin-bottom: -20vh;
+  margin-bottom: -25vh;
+  
 }
 
 .scroll-wrapper .video-bg {
   position: sticky;
   top: 0;
   object-fit: cover;
-  
+  transform-origin: top center;
+  position: sticky;
 }
 </style>
