@@ -20,10 +20,11 @@ const fotosDireita = [
   <main>
     <div style="height: 100vh;"></div>
 
-    <PhotoGrid 
-      :imagesCol1="fotosEsquerda" 
-      :imagesCol2="fotosDireita" 
-    />
+      <PhotoGrid 
+        :imagesCol1="fotosEsquerda" 
+        :imagesCol2="fotosDireita" 
+      />
+
     
     <div style="height: 100vh;"></div>
   </main>

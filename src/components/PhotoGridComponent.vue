@@ -54,20 +54,23 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+
 .photo-section {
   width: 100%;
-  height: 120vh;
+  min-height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
+
 .gallery-mask {
   width: 90%;
   max-width: 800px;
   height: 1000px;
   position: relative;
+  overflow: hidden;
   
   /* degrade ( NUNCA MEXER ) */
   mask-image: linear-gradient(

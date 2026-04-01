@@ -2,7 +2,6 @@
 
 import VideoComponent from "@/components/VideoComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
-// sem alterações
 </script>
 
 <template>
