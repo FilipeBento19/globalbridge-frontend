@@ -6,7 +6,7 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 
 <template>
   <section class="content-header">
-    <VideoComponent src="/videos/overlayglobalbrige.mp4" 
+    <VideoComponent src="/videos/overlayglobalbridge.mp4" 
       animateOnScroll 
       class="baseoverlay"
     />
