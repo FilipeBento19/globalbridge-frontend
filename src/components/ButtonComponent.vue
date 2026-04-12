@@ -78,7 +78,7 @@ defineProps({
 }
 
 .custom-btn:hover .icon-copy {
-  transform: translateX(-50);
+  transform: translateX(-90px);
   opacity: 1;
 }
 </style>

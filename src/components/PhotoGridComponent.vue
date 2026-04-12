@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import BadgeComponent from './BadgeComponent.vue'
 
 defineProps({
   imagesCol1: Array,
@@ -36,26 +37,78 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="photo-section" ref="photoSection">
-    <div class="gallery-mask">
-      <div class="gallery-container">
-        
-        <div class="column col-left" ref="col1">
-          <img v-for="(img, i) in imagesCol1" :key="i" :src="img" alt="Gallery 1">
-        </div>
-
-        <div class="column col-right" ref="col2">
-          <img v-for="(img, i) in imagesCol2" :key="i" :src="img" alt="Gallery 2">
-        </div>
-
+  <div class="main-layout-wrapper">
+    
+    <div class="info-side">
+      <BadgeComponent
+        style="
+        background-color: #e5e0cf;
+        ">
+        O céu é o limite
+      </BadgeComponent>
+      <h1 class="roboto-condensed">VOE ALÉM DOS SEUS LIMITES</h1>
+      <p style="padding-bottom: 30px;">
+        A GlobalBridge conecta você às melhores oportunidades de intercâmbio, reunindo informações essenciais sobre países, custo de vida, cultura e possibilidades de estudo e trabalho.
+      </p>
+      <p style="font-weight: 600; padding-bottom: 30px;">
+        Compare destinos, entenda requisitos de visto e programas disponíveis, encontre agências verificadas com mais clareza e segurança.
+      </p>
+      <p>
+        Simplificamos o planejamento da sua experiência internacional para que você escolha com confiança e dê o próximo passo com tranquilidade. Nossa missão é tornar o processo mais transparente, organizado e acessível, ajudando você a transformar o sonho do intercâmbio em um plano real e possível.
+      </p>
       </div>
-    </div>
-  </section>
+
+    <section class="photo-section" ref="photoSection">
+      <div class="gallery-mask">
+        <div class="gallery-container">
+          <div class="column col-left" ref="col1">
+            <img v-for="(img, i) in imagesCol1" :key="i" :src="img" alt="Gallery 1">
+          </div>
+          <div class="column col-right" ref="col2">
+            <img v-for="(img, i) in imagesCol2" :key="i" :src="img" alt="Gallery 2">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </template>
 
 <style scoped>
 
+.roboto-condensed {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 6rem;
+  font-weight: 900;
+  font-style: normal;
+  color: #333231;
+}
+
+.main-layout-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+  min-height: 100vh;
+}
+
+.info-side {
+  flex: 1; 
+  padding-right: 50px;
+}
+
+.info-side h1 {
+  line-height: 0.9;
+  font-weight: 800;
+  margin: 20px 0;
+}
+
+/* aqui pra baixo é photogrider */
+
 .photo-section {
+  flex: 1;
   width: 100%;
   min-height: 120vh;
   display: flex;
@@ -64,22 +117,14 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
-
 .gallery-mask {
-  width: 90%;
+  width: 100%; 
   max-width: 800px;
   height: 1000px;
   position: relative;
   overflow: hidden;
   
-  /* degrade ( NUNCA MEXER ) */
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
@@ -95,7 +140,6 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 30px;
   will-change: transform;
-
   margin-top: -400px;
 }
 

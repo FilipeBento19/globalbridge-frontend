@@ -16,7 +16,7 @@ import ButtonComponent from './ButtonComponent.vue';
     </nav>
 
     <ButtonComponent 
-      text="Work with us" 
+      text="Cadastre-se" 
       iconPath="/icons/icon_button.png" 
       class="buttonheader"
     />
@@ -25,7 +25,6 @@ import ButtonComponent from './ButtonComponent.vue';
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/*  Base  */
 .navbar {
   display: flex;
   align-items: center;
@@ -40,7 +39,6 @@ import ButtonComponent from './ButtonComponent.vue';
   margin: 16px auto;
 }
 
-/*  Navbar Logo  */
 .navbar_logo img {
   transition: transform 0.2s ease;
 }
