@@ -73,7 +73,7 @@ onMounted(() => {
 
 .video-bg {
   position: absolute;
-  top: 0;
+  top: -10;
   left: 0;
   width: 100%;
   height: 100%;
@@ -93,7 +93,6 @@ onMounted(() => {
   padding: 80px 5%;
   box-sizing: border-box;
   pointer-events: auto;
-  background: rgba(0, 0, 0, 0.3); /* Overlay escuro para legibilidade */
 }
 
 .hero-left {
@@ -142,9 +141,8 @@ onMounted(() => {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
-/* Ajuste para scroll animation se existir */
+/* (possivelmente apagar) */
 .scroll-wrapper {
-  height: 140vh;
   margin-bottom: -25vh;
 }
 

@@ -3,6 +3,7 @@
 import VideoComponent from "@/components/VideoComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import PhotoGrid from '@/components/PhotoGridComponent.vue'
+import Landing from '@/components/LandingComponent.vue';
 
 const fotosEsquerda = [
   '/images/testglobalbridge1.jpg',
@@ -34,20 +35,9 @@ const fotosDireita = [
     <PhotoGrid :imagesCol1="fotosEsquerda" :imagesCol2="fotosDireita" />
     <ButtonComponent text="Work with us" iconPath="/icons/icon_button.png" />
   </section>
-  
 
-  <section class="content-layout">
-
-      <PhotoGrid 
-        :imagesCol1="fotosEsquerda" 
-        :imagesCol2="fotosDireita" 
-      />
-
-    
-    <ButtonComponent 
-      text="Work with us" 
-      iconPath="/icons/icon_button.png" 
-    />
+  <section>
+    <Landing/>
   </section>
 </template>
 
