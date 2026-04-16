@@ -1,8 +1,19 @@
 <script setup>
-defineProps({
-  text: String,
-  iconPath: "/icon_button.png"
+const props = defineProps({
+  text: {
+    type: String,
+    default: 'Botão'
+  },
+  iconType: {
+    type: String,
+    default: 'primary'
+  }
 })
+
+const icons = {
+  primary: "/icons/icon_button.png",
+  secondary: "/icons/icon_button2.png", 
+}
 </script>
 
 <template>
@@ -10,8 +21,8 @@ defineProps({
     <span class="btn-text">{{ text }}</span>
     
     <div class="icon-wrapper">
-      <img :src="iconPath" class="btn-icon icon-original" alt="">
-      <img :src="iconPath" class="btn-icon icon-copy" alt="">
+      <img :src="icons[iconType]" class="btn-icon icon-original" alt="">
+      <img :src="icons[iconType]" class="btn-icon icon-copy" alt="">
     </div>
   </button>
 </template>
@@ -22,7 +33,7 @@ defineProps({
   align-items: center;
   justify-content: center;
   gap: 10px; 
-  padding: 15px 15px; 
+  padding: 12px 20px; /* um pouco menor no mobile */
   background-color: #A33DA3;
   color: white;
   border: none;
@@ -66,19 +77,26 @@ defineProps({
   opacity: 0;
 }
 
-/* --- Hover (animação rolando) --- */
-
-.custom-btn:hover .btn-text {
-  transform: translateX(30px); 
+/* --- ANIMAÇÃO SÓ PARA TELAS QUE SUPORTAM HOVER (desktop) --- */
+@media (hover: hover) and (min-width: 769px) {
+  .custom-btn:hover .btn-text {
+    transform: translateX(30px); 
+  }
+  .custom-btn:hover .icon-original {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  .custom-btn:hover .icon-copy {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.custom-btn:hover .icon-original {
-  transform: translateX(40px);
-  opacity: 0;
-}
-
-.custom-btn:hover .icon-copy {
-  transform: translateX(-90px);
-  opacity: 1;
+/* No mobile, mantém estático (sem transform) */
+@media (hover: none) or (max-width: 768px) {
+  .custom-btn:active {
+    transform: scale(0.97);
+    transition: transform 0.05s;
+  }
 }
 </style>

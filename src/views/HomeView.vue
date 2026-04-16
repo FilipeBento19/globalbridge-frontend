@@ -33,7 +33,6 @@ const fotosDireita = [
 
   <section class="content-layout">
     <PhotoGrid :imagesCol1="fotosEsquerda" :imagesCol2="fotosDireita" />
-    <ButtonComponent text="Work with us" iconPath="/icons/icon_button.png" />
   </section>
 
   <section>
@@ -53,7 +52,6 @@ const fotosDireita = [
 
 .content-layout {
   justify-self: center;
-  padding-bottom: 40vw;
 }
 
 </style>
