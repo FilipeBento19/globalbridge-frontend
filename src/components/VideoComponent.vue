@@ -200,7 +200,7 @@ onUnmounted(() => {
   .hero-layout {
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 70vh;
+    min-height: 80vh;
     padding: 40px 24px;
     gap: 24px;
   }
