@@ -1,14 +1,31 @@
 <script setup>
-import ButtonComponent from './ButtonComponent.vue';
-</script>
-<template>
+import { ref } from 'vue'
+import ButtonComponent from './ButtonComponent.vue'
 
+const mobileMenuOpen = ref(false)
+
+const toggleMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
+</script>
+
+<template>
   <header class="navbar">
-    <div>
-      <router-link class="navbar_logo" to="/"><img src="/logogb.png" alt=""></router-link>
+    <div class="navbar_logo">
+      <router-link to="/">
+        <img src="/logogb.png" alt="GlobalBridge">
+      </router-link>
     </div>
 
-    <nav class="navbar_links">
+    <!-- Ícone hambúrguer (3 pontos) - visível só no mobile -->
+    <button class="mobile-menu-btn" @click="toggleMenu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navegação desktop -->
+    <nav class="navbar_links desktop-nav">
       <router-link to="/">Meu destino</router-link>
       <router-link to="/">Companhias</router-link>
       <router-link to="/">Anus</router-link>
@@ -17,11 +34,26 @@ import ButtonComponent from './ButtonComponent.vue';
 
     <ButtonComponent 
       text="Cadastre-se" 
-      iconPath="/icons/icon_button.png" 
-      class="buttonheader"
+      iconType="primary" 
+      class="buttonheader desktop-btn"
     />
+
+    <!-- Menu mobile (overlay ou dropdown) -->
+    <Transition name="mobile-menu">
+      <div v-if="mobileMenuOpen" class="mobile-nav">
+        <router-link to="/" @click="toggleMenu">Meu destino</router-link>
+        <router-link to="/" @click="toggleMenu">Companhias</router-link>
+        <router-link to="/test" @click="toggleMenu">Contato</router-link>
+        <ButtonComponent 
+          text="Cadastre-se" 
+          iconType="primary"
+          @click="toggleMenu"
+        />
+      </div>
+    </Transition>
   </header>
 </template>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
@@ -29,7 +61,7 @@ import ButtonComponent from './ButtonComponent.vue';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15px;
+  padding: 0 16px;
   height: 72px;
   background: #ffffff;
   border-radius: 15px;
@@ -37,41 +69,112 @@ import ButtonComponent from './ButtonComponent.vue';
   font-family: 'Montserrat', sans-serif;
   max-width: 1200px;
   margin: 16px auto;
+  position: fixed;
 }
 
 .navbar_logo img {
+  height: 40px;
   transition: transform 0.2s ease;
 }
 
-.navbar_logo img:hover {
-  transform: scale(1.02);
-  transition: transform 0.2s ease;
-}
-
-
-/*  Nav links  */
-.navbar_links {
+/* --- Desktop navigation --- */
+.desktop-nav {
   display: flex;
   gap: 20px;
 }
 
-.navbar_links a {
+.desktop-nav a {
   text-decoration: none;
   color: #42023C;
   font-size: 14px;
   font-weight: 600;
-  position: relative;
-  transition: color 0.2s;
   padding: 8px 10px;
-
   transition: all 0.2s ease;
 }
 
-.navbar_links a:hover {
+.desktop-nav a:hover {
   background: #f0ede6;
   border-radius: 20px;
   transform: scale(1.05);
 }
 
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 110;
+}
 
+.mobile-menu-btn span {
+  width: 100%;
+  height: 3px;
+  background: #42023C;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* --- Menu mobile (overlay) --- */
+.mobile-nav {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: white;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  z-index: 100;
+  display: flex;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: #42023C;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+/* Transição suave */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@media (max-width: 768px) {
+  .desktop-nav,
+  .desktop-btn {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .navbar {
+    margin: 0px 12px;
+    position: fixed;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
+}
 </style>

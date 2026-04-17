@@ -1,5 +1,4 @@
 <script setup>
-
 import VideoComponent from "@/components/VideoComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import PhotoGrid from '@/components/PhotoGridComponent.vue'
@@ -36,22 +35,18 @@ const fotosDireita = [
   </section>
 
   <section>
-    <Landing/>
+    <Landing />
   </section>
 </template>
 
 <style scoped>
-
-
-.baseoverlay {
+.content-header {
   width: 100%;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  overflow-x: hidden;
 }
 
 .content-layout {
   justify-self: center;
+  width: 100%;
 }
-
 </style>

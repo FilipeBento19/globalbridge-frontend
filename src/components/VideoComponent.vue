@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from "vue"
+import { onMounted, onUnmounted, ref, computed } from "vue"
 import { useVideoLoader } from "@/composables/useVideoLoader.js"
 import { useScrollAnimation } from "@/composables/useScrollAnimation.js"
 
@@ -12,21 +12,46 @@ const props = defineProps({
 })
 
 const { videoSrc, loadVideo } = useVideoLoader()
-const scrollData = props.animateOnScroll ? useScrollAnimation(700) : null
-const videoStyle = scrollData ? scrollData.videoStyle : {}
+
+// Detectar mobile
+const isMobile = ref(false)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+// Usar o composable original (funciona no desktop)
+const scrollData = useScrollAnimation(700)
+const videoStyle = scrollData ? scrollData.videoStyle : ref({})
+
+// Só aplica o estilo de animação se NÃO for mobile e se animateOnScroll estiver ativo
+const finalVideoStyle = computed(() => {
+  if (isMobile.value) return {}
+  return props.animateOnScroll ? videoStyle.value : {}
+})
 
 onMounted(() => {
   loadVideo(props.src)
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
 })
 </script>
 
 <template>
-  <div :class="['video-container', { 'scroll-wrapper': animateOnScroll }]">
+  <div 
+    :class="[
+      'video-container', 
+      { 'scroll-wrapper': props.animateOnScroll && !isMobile }
+    ]"
+  >
     <div 
       class="video-overlay-content"
-      :style="animateOnScroll ? videoStyle : {}
-    ">
-      <!-- Vídeo DENTRO do overlay-content -->
+      :style="finalVideoStyle"
+    >
       <video
         v-if="videoSrc"
         :src="videoSrc"
@@ -53,6 +78,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* ===== ESTILOS BASE (DESKTOP) ===== */
 .video-container {
   width: 100%;
   position: relative;
@@ -61,8 +87,8 @@ onMounted(() => {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding-bottom: 370px;
-  }
+  padding-bottom: 390px;
+}
 
 .video-overlay-content {
   position: relative;
@@ -73,7 +99,7 @@ onMounted(() => {
 
 .video-bg {
   position: absolute;
-  top: -10;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -81,7 +107,6 @@ onMounted(() => {
   z-index: 1;
 }
 
-/* Layout do Texto - fica sobre o vídeo */
 .hero-layout {
   position: relative;
   z-index: 2;
@@ -141,7 +166,6 @@ onMounted(() => {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
-/* (possivelmente apagar) */
 .scroll-wrapper {
   margin-bottom: -25vh;
 }
@@ -151,4 +175,72 @@ onMounted(() => {
   top: 0;
 }
 
+/* ===== MOBILE (≤ 768px) ===== */
+@media (max-width: 768px) {
+  .video-container {
+    padding: 90px 16px 16px 16px;
+    box-sizing: border-box;
+    min-height: 60vh;
+  }
+
+  .video-overlay-content {
+    min-height: 70vh;
+    border-radius: 24px;
+    overflow: hidden;
+    /* Força remoção de qualquer sticky/transform */
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  .video-bg {
+    border-radius: 24px;
+  }
+
+  .hero-layout {
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 70vh;
+    padding: 40px 24px;
+    gap: 24px;
+  }
+
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    text-align: left;
+  }
+
+  .hero-right {
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .pill {
+    font-size: 0.75rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  /* Remove qualquer efeito do scroll-wrapper no mobile */
+  .scroll-wrapper {
+    margin-bottom: 0;
+  }
+  .scroll-wrapper .video-overlay-content {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+  }
+}
 </style>

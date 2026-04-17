@@ -77,7 +77,6 @@ const icons = {
   opacity: 0;
 }
 
-/* --- ANIMAÇÃO SÓ PARA TELAS QUE SUPORTAM HOVER (desktop) --- */
 @media (hover: hover) and (min-width: 769px) {
   .custom-btn:hover .btn-text {
     transform: translateX(30px); 
@@ -87,12 +86,11 @@ const icons = {
     opacity: 0;
   }
   .custom-btn:hover .icon-copy {
-    transform: translateX(0);
+    transform: translateX(30);
     opacity: 1;
   }
 }
 
-/* No mobile, mantém estático (sem transform) */
 @media (hover: none) or (max-width: 768px) {
   .custom-btn:active {
     transform: scale(0.97);
