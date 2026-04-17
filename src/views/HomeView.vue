@@ -5,17 +5,17 @@ import PhotoGrid from '@/components/PhotoGridComponent.vue'
 import Landing from '@/components/LandingComponent.vue';
 
 const fotosEsquerda = [
-  '/images/testglobalbridge1.jpg',
-  '/images/testglobalbridge2.jpg',
-  '/images/testglobalbridge4.jpg',
-  '/images/testglobalbridge3.jpg'
+  '/images/imagemgb1.png',
+  '/images/imagemgb2.png',
+  '/images/imagemgb4.png',
+  '/images/imagemgb3.png'
 ]
 
 const fotosDireita = [
-  '/images/testglobalbridge4.jpg',
-  '/images/testglobalbridge3.jpg',
-  '/images/testglobalbridge1.jpg',
-  '/images/testglobalbridge1.jpg'
+  '/images/imagemgb4.png',
+  '/images/imagemgb3.png',
+  '/images/imagemgb1.png',
+  '/images/imagemgb2.png'
 ]
 </script>
 

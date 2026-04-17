@@ -82,7 +82,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1400px;
+  max-width: 1450px;
   margin: 0 auto;
   padding: 0 5%;
   min-height: 100vh;

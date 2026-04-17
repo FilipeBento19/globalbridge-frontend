@@ -17,18 +17,17 @@ const toggleMenu = () => {
       </router-link>
     </div>
 
-    <!-- Ícone hambúrguer (3 pontos) - visível só no mobile -->
+  <!-- nav mobile -->
     <button class="mobile-menu-btn" @click="toggleMenu" aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <!-- Navegação desktop -->
+    <!-- nav desktop -->
     <nav class="navbar_links desktop-nav">
       <router-link to="/">Meu destino</router-link>
       <router-link to="/">Companhias</router-link>
-      <router-link to="/">Anus</router-link>
       <router-link to="/test">Contato</router-link>
     </nav>
 
@@ -38,7 +37,7 @@ const toggleMenu = () => {
       class="buttonheader desktop-btn"
     />
 
-    <!-- Menu mobile (overlay ou dropdown) -->
+    <!-- menu mobile -->
     <Transition name="mobile-menu">
       <div v-if="mobileMenuOpen" class="mobile-nav">
         <router-link to="/" @click="toggleMenu">Meu destino</router-link>
@@ -77,7 +76,7 @@ const toggleMenu = () => {
   transition: transform 0.2s ease;
 }
 
-/* --- Desktop navigation --- */
+/* desktop nav */
 .desktop-nav {
   display: flex;
   gap: 20px;
@@ -118,7 +117,7 @@ const toggleMenu = () => {
   transition: all 0.3s ease;
 }
 
-/* --- Menu mobile (overlay) --- */
+/* menu mobile (overlay) */
 .mobile-nav {
   position: fixed;
   top: 72px;
@@ -138,11 +137,10 @@ const toggleMenu = () => {
   text-decoration: none;
   color: #42023C;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 600; 
   padding: 10px;
 }
 
-/* Transição suave */
 .mobile-menu-enter-active,
 .mobile-menu-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
