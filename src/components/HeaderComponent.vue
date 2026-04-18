@@ -1,88 +1,178 @@
-<script>
-</script>
-<template>
+<script setup>
+import { ref } from 'vue'
+import ButtonComponent from './ButtonComponent.vue'
 
+const mobileMenuOpen = ref(false)
+
+const toggleMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
+</script>
+
+<template>
   <header class="navbar">
     <div class="navbar_logo">
-      <img src="/public/logogb.png" alt="">
+      <router-link to="/">
+        <img src="/logogb.png" alt="GlobalBridge">
+      </router-link>
     </div>
 
-    <nav class="navbar_links">
-      <a href="#">Meu destino</a>
-      <a href="#">Companhias</a>
-      <a href="#">Anos</a>
-      <a href="#">Contato</a>
+  <!-- nav mobile -->
+    <button class="mobile-menu-btn" @click="toggleMenu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- nav desktop -->
+    <nav class="navbar_links desktop-nav">
+      <router-link to="/">Meu destino</router-link>
+      <router-link to="/">Companhias</router-link>
+      <router-link to="/test">Contato</router-link>
     </nav>
 
-    <button class="navbar_cta">
-      Work with us
-      <span class="cta-icon">↗</span>
-    </button>
+    <ButtonComponent 
+      text="Cadastre-se" 
+      iconType="primary" 
+      class="buttonheader desktop-btn"
+    />
+
+    <!-- menu mobile -->
+    <Transition name="mobile-menu">
+      <div v-if="mobileMenuOpen" class="mobile-nav">
+        <router-link to="/" @click="toggleMenu">Meu destino</router-link>
+        <router-link to="/" @click="toggleMenu">Companhias</router-link>
+        <router-link to="/test" @click="toggleMenu">Contato</router-link>
+        <ButtonComponent 
+          text="Cadastre-se" 
+          iconType="primary"
+          @click="toggleMenu"
+        />
+      </div>
+    </Transition>
   </header>
 </template>
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/*  Base  */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15px;
+  padding: 0 16px;
   height: 72px;
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   font-family: 'Montserrat', sans-serif;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 16px auto;
-}
-/*  Nav links  */
-.navbar_links {
-  display: flex;
-  gap: 40px;
+  position: fixed;
 }
 
-.navbar_links a {
+.navbar_logo img {
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+/* desktop nav */
+.desktop-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.desktop-nav a {
   text-decoration: none;
-  color: #1a1a1a;
-  font-size: 14px;
-  font-weight: 600;
-  position: relative;
-  transition: color 0.2s;
-}
-
-.navbar_links a:hover {
   color: #42023C;
-}
-
-/*  CTA button  */
-.navbar_cta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #A33DA3;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 22px;
-  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  white-space: nowrap;
+  padding: 8px 10px;
+  transition: all 0.2s ease;
 }
 
-.cta-icon {
-  display: inline-flex;
+.desktop-nav a:hover {
+  background: #f0ede6;
+  border-radius: 20px;
+  transform: scale(1.05);
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 110;
+}
+
+.mobile-menu-btn span {
+  width: 100%;
+  height: 3px;
+  background: #42023C;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* menu mobile (overlay) */
+.mobile-nav {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: white;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  font-size: 14px;
-  line-height: 1;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  z-index: 100;
+  display: flex;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: #42023C;
+  font-size: 18px;
+  font-weight: 600; 
+  padding: 10px;
+}
+
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@media (max-width: 768px) {
+  .desktop-nav,
+  .desktop-btn {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .navbar {
+    margin: 0px 12px;
+    position: fixed;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
 }
 </style>
