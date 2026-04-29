@@ -35,7 +35,10 @@ const fotosDireita = [
   </section>
 
   <section>
-    <Landing />
+    <Landing 
+      src="/videos/video-landing.mp4"
+    />
+    
   </section>
 </template>
 

@@ -13,18 +13,15 @@ const props = defineProps({
 
 const { videoSrc, loadVideo } = useVideoLoader()
 
-// Detectar mobile
 const isMobile = ref(false)
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth < 768
 }
 
-// Usar o composable original (funciona no desktop)
 const scrollData = useScrollAnimation(700)
 const videoStyle = scrollData ? scrollData.videoStyle : ref({})
 
-// Só aplica o estilo de animação se NÃO for mobile e se animateOnScroll estiver ativo
 const finalVideoStyle = computed(() => {
   if (isMobile.value) return {}
   return props.animateOnScroll ? videoStyle.value : {}

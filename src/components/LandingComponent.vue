@@ -1,6 +1,20 @@
 <script setup>
-import BadgeComponent from '@/components/BadgeComponent.vue';
-import ButtonComponent from '@/components/ButtonComponent.vue';
+import BadgeComponent from '@/components/BadgeComponent.vue'
+import ButtonComponent from '@/components/ButtonComponent.vue'
+import { onMounted } from 'vue'
+import { useVideoLoader } from "@/composables/useVideoLoader.js"
+
+const props = defineProps({
+  src: String
+})
+
+const { videoSrc, loadVideo } = useVideoLoader()
+
+onMounted(() => {
+  if (props.src) {
+    loadVideo(props.src)
+  }
+})
 </script>
 
 <template>
@@ -23,12 +37,20 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
         <ButtonComponent text="Ver os planos" iconType="secondary" style="background-color: white; color: #42023C;" />
       </div>
     </div>
+    <div class="videoverlay">
+      <video
+      v-if="videoSrc"
+      :src="videoSrc"
+      autoplay muted loop playsinline
+      class="video-landing"
+    />
+    </div>
   </section>
 </template>
 
 <style scoped>
 .contentlayer {
-  display: flex;
+
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -83,9 +105,20 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
   margin: 10px 0 30px;
 }
 
+.video-landing {
+  width: 100%;
+  padding: 30px;
+  border-radius: 55px;
+  justify-self: center;
+  object-fit: cover;
+  height: 700px;
+}
+
+
 /* Tablet e desktop */
 @media (min-width: 768px) {
   .contentlayercima {
+    justify-self: center;
     flex-direction: row;
     gap: 20px;
   }
