@@ -9,15 +9,14 @@ defineProps({
 
 const col1 = ref(null)
 const col2 = ref(null)
-
 const photoSection = ref(null)
 
+// Parallax funcionando também no mobile
 const handleScroll = () => {
   if (!photoSection.value) return
   
   const sectionTop = photoSection.value.offsetTop
   const scroll = window.scrollY - sectionTop
-  
   const speed = 0.15 
   const startOffset = 50 
 
@@ -38,12 +37,8 @@ onUnmounted(() => {
 
 <template>
   <div class="main-layout-wrapper">
-    
     <div class="info-side">
-      <BadgeComponent
-        style="
-        background-color: #e5e0cf;
-        ">
+      <BadgeComponent style="background-color: #e5e0cf;">
         O céu é o limite
       </BadgeComponent>
       <h1 class="roboto-condensed">VOE ALÉM DOS SEUS LIMITES</h1>
@@ -56,7 +51,7 @@ onUnmounted(() => {
       <p>
         Simplificamos o planejamento da sua experiência internacional para que você escolha com confiança e dê o próximo passo com tranquilidade. Nossa missão é tornar o processo mais transparente, organizado e acessível, ajudando você a transformar o sonho do intercâmbio em um plano real e possível.
       </p>
-      </div>
+    </div>
 
     <section class="photo-section" ref="photoSection">
       <div class="gallery-mask">
@@ -70,12 +65,11 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
 <style scoped>
-
+/* ===== ESTILOS DESKTOP (ORIGINAL) ===== */
 .roboto-condensed {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 6rem;
@@ -88,14 +82,14 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1400px;
+  max-width: 1450px;
   margin: 0 auto;
   padding: 0 5%;
   min-height: 100vh;
 }
 
 .info-side {
-  flex: 1; 
+  flex: 1;
   padding-right: 50px;
 }
 
@@ -104,8 +98,6 @@ onUnmounted(() => {
   font-weight: 800;
   margin: 20px 0;
 }
-
-/* aqui pra baixo é photogrider */
 
 .photo-section {
   flex: 1;
@@ -118,12 +110,11 @@ onUnmounted(() => {
 }
 
 .gallery-mask {
-  width: 100%; 
+  width: 100%;
   max-width: 800px;
   height: 1000px;
   position: relative;
   overflow: hidden;
-  
   mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
@@ -143,8 +134,13 @@ onUnmounted(() => {
   margin-top: -400px;
 }
 
-.col-left { padding-top: 100px; }
-.col-right { padding-top: 0px; }
+.col-left {
+  padding-top: 100px;
+}
+
+.col-right {
+  padding-top: 0px;
+}
 
 .column img {
   width: 100%;
@@ -152,5 +148,61 @@ onUnmounted(() => {
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .main-layout-wrapper {
+    flex-direction: column; /* empilha: info em cima, grid embaixo */
+    padding: 40px 5%;
+    min-height: auto;
+    gap: 40px;
+  }
+
+  .info-side {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .roboto-condensed {
+    font-size: clamp(3rem, 8vw, 3rem); /* título menor no mobile */
+  }
+
+  .photo-section {
+    min-height: auto;
+    width: 100%;
+    /* não desabilita overflow, mantém a máscara funcionando */
+  }
+
+  .gallery-mask {
+    height: auto;         /* altura automática para caber o conteúdo */
+    max-width: 100%;
+    /* mantém a máscara igual ao desktop */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  .gallery-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* mantém 2 colunas */
+    gap: 12px;                     /* gap reduzido para mobile */
+    height: 50vh;
+  }
+
+  .column {
+    
+    gap: 12px;                     /* espaçamento menor entre imagens */
+    /* a animação parallax continua, pois não removemos o transform */
+  }
+
+  .col-left {
+    padding-top: 0;
+  }
+
+  .column img {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 2 / 3;           /* imagens mais compactas no mobile */
+    border-radius: 16px;
+  }
 }
 </style>
